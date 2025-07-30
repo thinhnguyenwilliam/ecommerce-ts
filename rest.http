@@ -1,0 +1,29 @@
+### Get Hello
+GET http://localhost:3000/
+
+### Create Item
+POST http://localhost:3000/items
+Content-Type: application/json
+
+{
+  "name": "Sample Item",
+  "price": 99.99
+}
+
+### Get All Items
+GET http://localhost:3000/items
+
+### Get Item by ID
+GET http://localhost:3000/items/1
+
+### Update Item by ID
+PUT http://localhost:3000/items/1
+Content-Type: application/json
+
+{
+  "name": "Updated Item",
+  "price": 150.0
+}
+
+### Delete Item by ID
+DELETE http://localhost:3000/items/1
