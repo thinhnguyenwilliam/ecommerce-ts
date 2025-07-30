@@ -1,12 +1,22 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
+import cors from 'cors';
 import morgan from 'morgan';
 import helmet from 'helmet';
 import compression from 'compression';
-import { Request, Response } from 'express';
 
 const app = express();
 
 // ---- Start middleware
+app.use(cors({
+    origin: [
+        'http://localhost:4200',
+        'https://yourdomain.com'
+    ],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true
+}));
+
+
 // Use Morgan middleware
 app.use(morgan('dev')); // or 'combined', 'tiny', etc.
 //app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
