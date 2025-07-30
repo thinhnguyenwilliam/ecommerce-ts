@@ -1,30 +1,34 @@
 // src/server.ts
-import app from './app';
+import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import { connectDB } from './config/db';
-
 dotenv.config();
+import { checkOverload } from './helpers/db.utils';
+
+import app from './app';
+import Database from './config/db';
 
 const PORT = process.env.PORT || 1234;
 
-let server: ReturnType<typeof app.listen>; // Declare in outer scope
+let server: ReturnType<typeof app.listen>;
 
-// Connect to MongoDB then start server
-connectDB().then(() => {
+Database.init().then(() => {
     server = app.listen(PORT, () => {
-        console.log(`🚀 Server is running at http://localhost:${PORT}`);
+        console.log(`🚀 Server running at http://localhost:${PORT}`);
     });
 }).catch((err) => {
-    console.error('❌ Failed to connect to MongoDB:', err);
-    process.exit(1);
+    console.error('❌ Server startup failed:', err);
+    process.exit(1);// Exit with failure
 });
 
+//checkOverload(); // Start system monitoring
+
 // Graceful shutdown
-process.on('SIGINT', () => {
+process.on('SIGINT', async () => {
     if (server) {
-        server.close(() => {
-            console.log('👋 Gracefully shutting down Express server');
-            process.exit(0);
+        server.close(async () => {
+            await mongoose.connection.close();
+            console.log('🛑 MongoDB disconnected');
+            process.exit(0);// Exit cleanly
         });
     }
 });
