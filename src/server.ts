@@ -2,7 +2,7 @@
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 dotenv.config();
-import { checkOverload } from './helpers/db.utils';
+//import { checkOverload } from './helpers/db.utils';
 
 import app from './app';
 import Database from './config/db';
@@ -14,6 +14,7 @@ let server: ReturnType<typeof app.listen>;
 Database.init().then(() => {
     server = app.listen(PORT, () => {
         console.log(`🚀 Server running at http://localhost:${PORT}`);
+        console.log(`🌍 Running in ${process.env.NODE_ENV || 'dev'} mode`);
     });
 }).catch((err) => {
     console.error('❌ Server startup failed:', err);

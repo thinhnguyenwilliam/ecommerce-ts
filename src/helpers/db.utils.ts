@@ -16,7 +16,7 @@ export const checkOverload = () => {
     setInterval(() => {
         const numCores = os.cpus().length;
         const memoryUsage = process.memoryUsage().rss / 1024 / 1024; // in MB
-        const maxConnections = numCores * 5;
+        //const maxConnections = numCores * 5;
 
         const connectionState = mongoose.connection.readyState;
 

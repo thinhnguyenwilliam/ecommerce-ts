@@ -2,16 +2,11 @@
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import { countConnect } from '../helpers/db.utils';
+import config from './environment';
 
 dotenv.config();
 
-const {
-    DEV_DB_HOST = '127.0.0.1',
-    DEV_DB_PORT = '27017',
-    DEV_DB_NAME = 'shopDEV'
-} = process.env;
-
-const MONGO_URI = `mongodb://${DEV_DB_HOST}:${DEV_DB_PORT}/${DEV_DB_NAME}`;
+const dbURI = `mongodb://${config.db.host}:${config.db.port}/${config.db.name}`;
 
 class Database {
     private static instance: Database;
@@ -23,14 +18,15 @@ class Database {
     private async connect(): Promise<void> {
         try {
             mongoose.set('debug', true);
-            await mongoose.connect(MONGO_URI, {
+            await mongoose.connect(dbURI, {
                 maxPoolSize: 50, // Limit connection pool
                 // Optional: timeout settings
                 serverSelectionTimeoutMS: 5000, // Fail fast if server not found
                 socketTimeoutMS: 45000,         // Timeout for long-running queries
             });
+            console.log(`🔗 MongoDB URI: ${dbURI}`);
             console.log('✅ Connected to MongoDB');
-
+            
             // Optional: use your monitoring function
             countConnect(); // Logs the current connection state
         } catch (err) {
