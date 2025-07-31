@@ -39,12 +39,8 @@ app.use(compression({
 app.use(express.json());
 // ---- End middleware
 
-app.get('/', (_req, res) => {
-    res.json({
-        message: 'Hello from Express + TypeScript!',
-        status: 'success'
-    });
-});
+import routerGeneral from './routes';
+app.use('/', routerGeneral);
 
 
 export default app;
