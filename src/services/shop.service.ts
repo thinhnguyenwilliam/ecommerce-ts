@@ -2,6 +2,9 @@
 import { Shop } from '../models/shop.model';
 import bcrypt from 'bcrypt';
 import crypto from 'crypto';
+import { keyTokenService } from './keyToken.service';
+import { Types } from 'mongoose';
+import { createTokenPair } from '../auth/authUtils';
 
 const RoleShop = {
     SHOP: 'SHOP',
@@ -58,13 +61,40 @@ class ShopService {
         console.log('Public Key:', publicKey);
 
         // TODO: Save keys to DB in KeyToken model
-        // await KeyToken.create({ shopId: newShop._id, publicKey, privateKey });
+        const keyToken = await keyTokenService.createKeyToken(
+            newShop._id as Types.ObjectId,
+            publicKey
+        );
+
+        console.log('🔐 KeyToken saved to DB:', keyToken);
+        console.log({
+            user: keyToken.user.toString(),
+            publicKey: keyToken.publicKey.slice(0, 30) + '...',
+            id: keyToken._id //That returns the actual Types.ObjectId, usable in DB operations.
+        });
+
+        const shopPayload = {
+            userId: newShop._id as Types.ObjectId,
+            email: newShop.email,
+            roles: newShop.roles
+        };
+
+        const tokens = await createTokenPair(shopPayload, publicKey, privateKey);
+        console.log('🔐 Token pair created:', tokens);
+        console.log('🔐 Token pair created:', {
+            accessToken: tokens.accessToken.slice(0, 50) + '...', // optional: slice to shorten output
+            refreshToken: tokens.refreshToken.slice(0, 50) + '...'
+        });
+        console.log('🔐 Access Token:', tokens.accessToken);
+        console.log('🔄 Refresh Token:', tokens.refreshToken);
 
         return {
-            code: 'SHOP_CREATED',
+            code: 201,
             message: 'Shop created successfully!',
             metadata: {
-                shopId: newShop._id
+                shop: newShop,
+                shopId: newShop._id,
+                tokens
             }
         };
     }

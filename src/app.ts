@@ -36,7 +36,10 @@ app.use(compression({
 }));
 
 
-app.use(express.json());
+app.use(express.json()); // Parse incoming JSON requests
+
+// Parse URL-encoded data (e.g., form submissions)
+app.use(express.urlencoded({ extended: true }));
 // ---- End middleware
 
 import routerGeneral from './routes';

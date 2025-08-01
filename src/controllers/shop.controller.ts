@@ -10,12 +10,14 @@ class ShopController {
             // TODO: validate input, hash password, check for duplicates, save to DB
             console.log('📥 Shop sign-up request:', req.body);
 
-            const newShop = await shopService.createShop({ name, email, password, phone, address });
+            const result = await shopService.createShop({ name, email, password, phone, address });
 
-            // Simulated response
-            res.status(201).json({
-                metadata: newShop
+            // Return response to client
+            res.status(Number(result.code)).json({
+                message: result.message,
+                metadata: result.metadata
             });
+
         } catch (error) {
             console.error('❌ Shop sign-up failed:', error);
             res.status(500).json({ error: 'Internal Server Error' });
