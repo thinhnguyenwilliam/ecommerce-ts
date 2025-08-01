@@ -72,7 +72,10 @@ class ShopService {
             publicKey: keyToken.publicKey.slice(0, 30) + '...',
             id: keyToken._id //That returns the actual Types.ObjectId, usable in DB operations.
         });
-
+        // 3. Convert PEM publicKey back to KeyObject (if needed)
+        const keyTokenObject = crypto.createPublicKey(publicKey);
+        console.log('🔑 PublicKey KeyObject:', keyTokenObject);
+        
         const shopPayload = {
             userId: newShop._id as Types.ObjectId,
             email: newShop.email,
