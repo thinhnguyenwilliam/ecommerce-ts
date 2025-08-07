@@ -20,18 +20,18 @@ export const createTokenPair = async (
     privateKey: string
 ): Promise<TokenPair> => {
     // 1. Sign access token (2 days)
-    const accessToken = jwt.sign(payload, privateKey, {
-        algorithm: 'RS256',
+    const accessToken = jwt.sign(payload, publicKey, {
+        algorithm: 'HS256',
         expiresIn: '2d'
     });
 
     // 2. Sign refresh token (7 days)
     const refreshToken = jwt.sign(payload, privateKey, {
-        algorithm: 'RS256',
+        algorithm: 'HS256',
         expiresIn: '7d'
     });
 
-    // 3. Verify access token using publicKey (just to confirm)
+    // 3. Verify using the same privateKey (since HS256 is symmetric)
     jwt.verify(accessToken, publicKey, (err, decoded) => {
         if (err) {
             console.error('❌ Error verifying token:', err);

@@ -7,6 +7,7 @@ export const COLLECTION_NAME = 'Keys';
 export interface IKeyToken extends Document {
     user: Types.ObjectId;
     publicKey: string;
+    privateKey: string;
     refreshTokens: string[];
 }
 
@@ -18,6 +19,10 @@ const KeyTokenSchema = new Schema<IKeyToken>(
             ref: 'Shop' // Must match your Shop model name
         },
         publicKey: {
+            type: String,
+            required: true
+        },
+        privateKey: {
             type: String,
             required: true
         },
