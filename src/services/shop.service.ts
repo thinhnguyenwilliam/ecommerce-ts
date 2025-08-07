@@ -5,6 +5,7 @@ import crypto from 'crypto';
 import { keyTokenService } from './keyToken.service';
 import { Types } from 'mongoose';
 import { createTokenPair } from '../auth/authUtils';
+import { getInfoData } from '../utils';
 
 const RoleShop = {
     SHOP: 'SHOP',
@@ -75,7 +76,7 @@ class ShopService {
         // 3. Convert PEM publicKey back to KeyObject (if needed)
         const keyTokenObject = crypto.createPublicKey(publicKey);
         console.log('🔑 PublicKey KeyObject:', keyTokenObject);
-        
+
         const shopPayload = {
             userId: newShop._id as Types.ObjectId,
             email: newShop.email,
@@ -95,8 +96,10 @@ class ShopService {
             code: 201,
             message: 'Shop created successfully!',
             metadata: {
-                shop: newShop,
-                shopId: newShop._id,
+                shop: getInfoData({
+                    fields: ['_id', 'name', 'email'],
+                    object: newShop
+                }),
                 tokens
             }
         };
