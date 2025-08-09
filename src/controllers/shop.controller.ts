@@ -13,7 +13,8 @@ class ShopController {
             const result = await shopService.createShop({ name, email, password, phone, address });
 
             // Return response to client
-            res.status(Number(result.code)).json({
+            res.status(409).json({
+                code: result.code,
                 message: result.message,
                 metadata: result.metadata
             });
