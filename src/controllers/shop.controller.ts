@@ -4,25 +4,23 @@ import { shopService } from '../services/shop.service';
 
 class ShopController {
     public async signUp(req: Request, res: Response): Promise<void> {
-        try {
-            const { name, email, password, phone, address } = req.body;
 
-            // TODO: validate input, hash password, check for duplicates, save to DB
-            console.log('📥 Shop sign-up request:', req.body);
+        const { name, email, password, phone, address } = req.body;
 
-            const result = await shopService.createShop({ name, email, password, phone, address });
+        // TODO: validate input, hash password, check for duplicates, save to DB
+        //console.log('📥 Shop sign-up request:', req.body);
 
-            // Return response to client
-            res.status(409).json({
-                code: result.code,
-                message: req.t("welcome"),
-                metadata: result.metadata
-            });
+        const result = await shopService.createShop({ name, email, password, phone, address });
 
-        } catch (error) {
-            console.error('❌ Shop sign-up failed:', error);
-            res.status(500).json({ error: 'Internal Server Error' });
-        }
+        // Return response to client
+        // res.status(409).json({
+        //     code: result.code,
+        //     message: req.t("welcome"),
+        //     metadata: result.metadata
+        // });
+        res.status(201).json({
+            result
+        });
     }
 
     // public async login(...) {}

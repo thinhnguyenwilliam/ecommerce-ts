@@ -1,4 +1,5 @@
-import express, { Request, Response } from 'express';
+// src/app.ts
+import express, { Request, Response, NextFunction  } from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import helmet from 'helmet';
@@ -68,5 +69,26 @@ app.use(express.urlencoded({ extended: true }));
 import routerGeneral from './routes';
 app.use('/', routerGeneral);
 
+// handling error
+// Custom Error type with status
+interface CustomError extends Error {
+    status?: number;
+}
 
+// 404 handler: Runs only if no route matches.
+app.use((req: Request, res: Response, next: NextFunction) => {
+    const error: CustomError = new Error('Not Found');
+    error.status = 404;
+    next(error);
+});
+
+// Error handler middleware
+app.use((error: CustomError, req: Request, res: Response, next: NextFunction) => {
+    const statusCode = error.status || 500;
+    res.status(statusCode).json({
+        status: 'error',
+        code: statusCode,
+        message: error.message || 'Internal server error',
+    });
+});
 export default app;
