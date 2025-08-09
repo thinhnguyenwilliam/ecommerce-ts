@@ -15,7 +15,7 @@ class ShopController {
             // Return response to client
             res.status(409).json({
                 code: result.code,
-                message: result.message,
+                message: req.t("welcome"),
                 metadata: result.metadata
             });
 

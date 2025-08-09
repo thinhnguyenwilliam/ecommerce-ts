@@ -2,9 +2,11 @@
 @api_key = 66e49c06973d0234b481d8d92b29555543c05482ada2ac9a059deeced2c8bd06ced6fc962d026550d9bdfc2a485fdd63c874cf51a02aceb34e16fccc733324f1
 
 ### 📦 Create Shop
+### POST {{url_dev}}/shop/sign-up?lang=vi # can use this but i like header "Accept-Language: vi" instead
 POST {{url_dev}}/shop/sign-up
 Content-Type: application/json
 x-api-key: {{api_key}}
+Accept-Language: vi
 
 {
   "name": "My Shop",
