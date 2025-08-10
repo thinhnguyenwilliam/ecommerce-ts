@@ -1,6 +1,7 @@
 // src/controllers/shop.controller.ts
 import { Request, Response } from 'express';
 import { shopService } from '../services/shop.service';
+import { CREATED } from '../core/success.response';
 
 class ShopController {
     public async signUp(req: Request, res: Response): Promise<void> {
@@ -12,15 +13,11 @@ class ShopController {
 
         const result = await shopService.createShop({ name, email, password, phone, address }, t);
 
-        // Return response to client
-        // res.status(409).json({
-        //     code: result.code,
-        //     message: req.t("welcome"),
-        //     metadata: result.metadata
-        // });
-        res.status(201).json({
-            result
-        });
+        new CREATED({
+            message: 'Shop successfully created',
+            metadata: result,
+            options: { limit: 10, pagination: true }
+        }).send(res);
     }
 
     // public async login(...) {}

@@ -68,7 +68,6 @@ class ShopService {
 
         return {
             code: 201,
-            message: 'Shop created successfully!',
             metadata: {
                 shop: getInfoData({
                     fields: ['_id', 'name', 'email'],
