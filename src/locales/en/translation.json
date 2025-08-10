@@ -1,4 +1,5 @@
 {
     "welcome": "Welcome to our API!",
-    "goodbye": "Goodbye!"
+    "goodbye": "Goodbye!",
+    "shop_created": "Shop already exists"
 }

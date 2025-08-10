@@ -7,6 +7,7 @@ import { Types } from 'mongoose';
 import { createTokenPair } from '../auth/authUtils';
 import { getInfoData } from '../utils';
 import { ConflictRequestError } from '../core/error.response';
+import { TFunction } from "i18next";
 
 const RoleShop = {
     SHOP: 'SHOP',
@@ -24,10 +25,10 @@ interface ShopPayload {
 }
 
 class ShopService {
-    public async createShop(payload: ShopPayload) {
+    public async createShop(payload: ShopPayload, t: TFunction) {
         // 1. Check if email already exists
         const existingShop = await Shop.findOne({ email: payload.email }).lean();
-        if (existingShop) throw new ConflictRequestError("Shop already exists");
+        if (existingShop) throw new ConflictRequestError(t("shop_created"));
 
         // 2. Hash the password
         const hashedPassword = await bcrypt.hash(payload.password, 10);
