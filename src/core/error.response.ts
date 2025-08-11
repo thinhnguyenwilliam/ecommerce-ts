@@ -1,5 +1,8 @@
 // src/core/error.response.ts
 
+import { ReasonPhrases } from "../utils/reasonPhrases";
+import { StatusCodes } from "../utils/statusCode";
+
 export const StatusCode = {
     FORBIDDEN: 403,
     CONFLICT: 409,
@@ -35,6 +38,15 @@ export class BadRequestError extends ErrorResponse {
     constructor(
         message: string = ReasonStatusCode.FORBIDDEN,
         statusCode: number = StatusCode.FORBIDDEN
+    ) {
+        super(message, statusCode);
+    }
+}
+
+export class AuthFailureError extends ErrorResponse {
+    constructor(
+        message: string = ReasonPhrases.UNAUTHORIZED,
+        statusCode: number = StatusCodes.UNAUTHORIZED
     ) {
         super(message, statusCode);
     }

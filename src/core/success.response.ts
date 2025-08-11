@@ -16,14 +16,14 @@ interface SuccessParams {
     statusCode?: number;
     reasonStatusCode?: string;
     metadata?: Record<string, any>;
-    options?: Record<string, any>; // ✅ added
+    options?: Record<string, any>;
 }
 
 export class SuccessResponse {
     message: string;
     status: number;
     metadata: Record<string, any>;
-    options?: Record<string, any>; // ✅ added
+    options?: Record<string, any>;
 
     constructor({
         message,
@@ -55,6 +55,10 @@ export class OK extends SuccessResponse { }
 
 
 export class CREATED extends SuccessResponse {
+
+    //Omit<SuccessParams, 'statusCode' | 'reasonStatusCode'>
+    // “Take the SuccessParams type, but remove the statusCode and reasonStatusCode properties.”
+    
     constructor(params: Omit<SuccessParams, 'statusCode' | 'reasonStatusCode'>) {
         super({
             ...params,
