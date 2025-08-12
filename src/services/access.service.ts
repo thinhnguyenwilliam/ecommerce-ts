@@ -6,6 +6,7 @@ import { generateKeyPair } from "../utils/keyGenerator";
 import { createTokenPair } from "../auth/authUtils";
 import { getInfoData } from "../utils";
 import { Types } from 'mongoose';
+import { keyTokenService } from "./keyToken.service";
 
 interface LoginParams {
     email: string;
@@ -40,7 +41,15 @@ class AccessService {
             privateKey
         );
 
-        console.log("🔐 Token pair created:", tokens);
+        //console.log("🔐 Token pair created:", tokens);
+
+        await keyTokenService.createKeyToken(
+            foundShop._id as Types.ObjectId,
+            publicKey,
+            privateKey,
+            tokens.refreshToken
+        );
+
 
         // 5. Return shop info + tokens
         return {

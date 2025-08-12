@@ -56,27 +56,27 @@ class ShopService {
         const privateKey = crypto.randomBytes(64).toString("hex");
         const publicKey = crypto.randomBytes(64).toString("hex");
 
-        console.log("Private Key is:", privateKey);
-        console.log("Public Key is:", publicKey);
+        //console.log("Private Key is:", privateKey);
+        //console.log("Public Key is:", publicKey);
 
-        // TODO: Save keys to DB in KeyToken model
-        const keyToken = await keyTokenService.createKeyToken(
-            newShop._id as Types.ObjectId,
-            publicKey,
-            privateKey
-        );
-
-        console.log('🔐 KeyToken saved to DB:', keyToken);
-
-        const shopPayload = {
+         const shopPayload = {
             userId: newShop._id as Types.ObjectId,
             email: newShop.email,
             roles: newShop.roles
         };
 
         const tokens = await createTokenPair(shopPayload, publicKey, privateKey);
-        console.log('🔐 Token pair created:', tokens);
+        //console.log('🔐 Token pair created:', tokens);
 
+        // TODO: Save keys to DB in KeyToken model
+        const keyToken = await keyTokenService.createKeyToken(
+            newShop._id as Types.ObjectId,
+            publicKey,
+            privateKey,
+            tokens.refreshToken
+        );
+
+        //console.log('🔐 KeyToken saved to DB:', keyToken);
 
         return {
             code: 201,

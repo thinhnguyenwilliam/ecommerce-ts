@@ -3,16 +3,34 @@ import { Key } from '../models/key-token.model';
 import { Types } from 'mongoose';
 
 class KeyTokenService {
-    public async createKeyToken(userId: Types.ObjectId, publicKey: string, privateKey: string) {
-        //findOneAndUpdate--> if it exists, update it; if not, create a new one.
-        const tokenDoc = await Key.findOneAndUpdate(
-            { user: userId },
-            { publicKey, privateKey, refreshTokens: [] },
-            { upsert: true, new: true }
-        );
+    /**
+     * Creates or updates a key token document for a user.
+     * @param userId MongoDB ObjectId for the user
+     * @param publicKey Public key string
+     * @param privateKey Private key string
+     * @param refreshToken Current refresh token
+     */
+    public async createKeyToken(
+        userId: Types.ObjectId,
+        publicKey: string,
+        privateKey: string,
+        refreshToken: string
+    ) {
+        const filter = { user: userId };
+
+        const update = {
+            publicKey,
+            privateKey,
+            refreshTokensUsed: [],
+            refreshToken
+        };
+
+        const options = { upsert: true, new: true };
+
+        const tokenDoc = await Key.findOneAndUpdate(filter, update, options);
         return tokenDoc;
     }
-
 }
 
 export const keyTokenService = new KeyTokenService();
+
