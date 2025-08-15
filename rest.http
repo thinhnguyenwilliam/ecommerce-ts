@@ -1,5 +1,16 @@
 @url_dev = http://localhost:3000/v1/api
 @api_key = 66e49c06973d0234b481d8d92b29555543c05482ada2ac9a059deeced2c8bd06ced6fc962d026550d9bdfc2a485fdd63c874cf51a02aceb34e16fccc733324f1
+@access_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODliZDJiZTAzOGIxN2M3NTliM2UzN2YiLCJlbWFpbCI6InNob3BAZXhhbXBsZS5jb20iLCJpYXQiOjE3NTUzMDE4MDcsImV4cCI6MTc1NTQ3NDYwN30.SmZ5fIBMtWUhMz49NXPE0ANXn_z7WRxH7Y-M0YUWcjo
+@client_id = 689bd2be038b17c759b3e37f
+
+### 🚪 Logout Shop
+POST {{url_dev}}/logout
+Content-Type: application/json
+Accept-Language: vi
+x-api-key: {{api_key}}
+x-client-id: {{client_id}}
+authorization: {{access_token}}
+
 
 ### 📦 Create Shop
 ### POST {{url_dev}}/shop/sign-up?lang=vi # can use this but i like header "Accept-Language: vi" instead

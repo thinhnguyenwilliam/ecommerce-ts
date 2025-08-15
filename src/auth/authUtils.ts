@@ -1,6 +1,55 @@
 // src/auth/authUtils.ts
 import jwt from 'jsonwebtoken';
 import { Types } from 'mongoose';
+import { asyncHandler } from '../middleware/handle-error';
+import { AuthFailureError, NotFoundError } from '../core/error.response';
+import { keyTokenService } from '../services/keyToken.service';
+
+const HEADER = {
+    API_KEY: 'x-api-key',
+    CLIENT_ID: 'x-client-id',
+    AUTHORIZATION: 'authorization'
+};
+
+// Extend Express Request to store keyStore
+declare module 'express-serve-static-core' {
+    interface Request {
+        keyStore?: any;
+        user?: any;
+    }
+}
+
+export const authentication = asyncHandler(async (req, res, next) => {
+    // 1. Check if userId is provided
+    const userId = req.headers[HEADER.CLIENT_ID] as string;
+    if (!userId) throw new AuthFailureError('Invalid Request: Missing userId');
+
+    // 2. Get keyStore from DB
+    const keyStore = await keyTokenService.findByUserId(userId);
+    if (!keyStore) throw new NotFoundError('Not Found: keyStore');
+
+    // 3. Get access token
+    const accessToken = req.headers[HEADER.AUTHORIZATION] as string;
+    if (!accessToken) throw new AuthFailureError('Invalid Request: Missing accessToken');
+
+    try {
+        // 4. Verify token
+        const decodedUser = jwt.verify(accessToken, keyStore.publicKey) as { userId: string };
+
+        if (userId !== decodedUser.userId) {
+            throw new AuthFailureError('Invalid userId');
+        }
+
+        // 5. Store in request
+        req.keyStore = keyStore;
+        req.user = decodedUser;
+
+        return next();
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+});
 
 interface TokenPayload {
     userId: Types.ObjectId;

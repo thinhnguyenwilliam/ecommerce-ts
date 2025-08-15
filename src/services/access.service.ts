@@ -15,6 +15,14 @@ interface LoginParams {
 }
 
 class AccessService {
+    public static async logout(keyStore: any) {
+        if (!keyStore?._id) {
+            throw new AuthFailureError("Invalid keyStore");
+        }
+
+        const deleted = await keyTokenService.removeKeyById(keyStore._id);
+        return deleted;
+    }
     /*
         1 - Check email in DB
         2 - Match password

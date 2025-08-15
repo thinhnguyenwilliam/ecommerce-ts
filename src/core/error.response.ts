@@ -51,3 +51,12 @@ export class AuthFailureError extends ErrorResponse {
         super(message, statusCode);
     }
 }
+
+export class NotFoundError extends ErrorResponse {
+    constructor(
+        message: string = ReasonPhrases.NOT_FOUND,
+        statusCode: number = StatusCodes.NOT_FOUND
+    ) {
+        super(message, statusCode);
+    }
+}
