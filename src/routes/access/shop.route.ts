@@ -26,4 +26,9 @@ router.post(
     asyncHandler(accessController.logout.bind(accessController))
 );
 
+router.post(
+    '/shop/handlerRefreshToken',
+    asyncHandler(accessController.handlerRefreshToken.bind(accessController))
+);
+
 export default router;

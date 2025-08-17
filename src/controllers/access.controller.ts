@@ -1,9 +1,18 @@
 // src/controllers/access.controller.ts
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 import { SuccessResponse } from "../core/success.response";
 import { AccessService } from "../services/access.service";
 
 class AccessController {
+    public async handlerRefreshToken(req: Request, res: Response, next: NextFunction) {
+        const result = await AccessService.handleRefreshToken(req.body.refreshToken);
+
+        return new SuccessResponse({
+            message: "Get Token successful",
+            metadata: result
+        }).send(res);
+    }
+
     public async logout(req: Request, res: Response) {
         const result = await AccessService.logout(req.keyStore);
 

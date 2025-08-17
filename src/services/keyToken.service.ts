@@ -3,6 +3,18 @@ import { Key } from '../models/key-token.model';
 import { Types } from 'mongoose';
 
 class KeyTokenService {
+    public async findByRefreshToken(refreshToken: string) {
+        return await Key.findOne({ refreshToken: refreshToken });
+    }
+
+    public async deleteKeyById(userId: Types.ObjectId) {
+        return await Key.findOneAndDelete({ user: userId });
+    }
+
+    public async findByRefreshTokenUsed(refreshToken: string) {
+        return await Key.findOne({ refreshTokensUsed: refreshToken });
+    }
+
     public async removeKeyById(id: Types.ObjectId) {
         return await Key.deleteOne({ _id: id });
     }

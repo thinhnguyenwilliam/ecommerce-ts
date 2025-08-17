@@ -5,6 +5,10 @@ import { asyncHandler } from '../middleware/handle-error';
 import { AuthFailureError, NotFoundError } from '../core/error.response';
 import { keyTokenService } from '../services/keyToken.service';
 
+export const verifyJWT = (token: string, keySecret: string) => {
+    return jwt.verify(token, keySecret);
+};
+
 const HEADER = {
     API_KEY: 'x-api-key',
     CLIENT_ID: 'x-client-id',
