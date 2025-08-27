@@ -1,6 +1,7 @@
 // src/routes/index.ts
 import { Router } from 'express';
 import shopRouter from './access/shop.route';
+import productRouter from "./product/product.route";
 import { apiKey, permission } from '../auth/checkAuth';
 
 
@@ -14,6 +15,7 @@ router.use(apiKey);
 router.use(permission('0000'));
 
 // 3️⃣ Mount the actual feature routes
+router.use('/v1/api/product', productRouter);
 router.use('/v1/api', shopRouter);
 
 export default router;

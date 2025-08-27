@@ -12,7 +12,7 @@ export interface IProduct extends Document {
     product_quantity: number;
     product_type: "Electronics" | "Clothing" | "Furniture";
     product_shop?: Types.ObjectId;
-    product_attribute: Record<string, any>;
+    product_attributes: Record<string, any>;
 }
 
 // ------------------------
@@ -55,7 +55,7 @@ const productSchema = new Schema<IProduct>(
             enum: ["Electronics", "Clothing", "Furniture"],
         },
         product_shop: { type: Schema.Types.ObjectId, ref: 'Shop' },
-        product_attribute: { type: Schema.Types.Mixed, required: true },
+        product_attributes: { type: Schema.Types.Mixed, required: true },
     },
     {
         collection: COLLECTION_NAME,

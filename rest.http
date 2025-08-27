@@ -1,7 +1,68 @@
 @url_dev = http://localhost:3000/v1/api
 @api_key = 66e49c06973d0234b481d8d92b29555543c05482ada2ac9a059deeced2c8bd06ced6fc962d026550d9bdfc2a485fdd63c874cf51a02aceb34e16fccc733324f1
-@access_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGExNDU3ZTQzMWY0YTkzMWViYmNjZWUiLCJlbWFpbCI6InNob3BAZXhhbXBsZS5jb20iLCJpYXQiOjE3NTUzOTk3NTIsImV4cCI6MTc1NTU3MjU1Mn0.pWci3d3skgtgv1TDVGd6ecOPGqcBfw1kjbnih4-OMEk
+@access_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGExNDU3ZTQzMWY0YTkzMWViYmNjZWUiLCJlbWFpbCI6InNob3BAZXhhbXBsZS5jb20iLCJpYXQiOjE3NTYzMDc5MjAsImV4cCI6MTc1NjQ4MDcyMH0.bnYJVplpVY_0Xzd2Ml3Ugd282kUi73VGvUS__r7lwDU
 @client_id = 68a1457e431f4a931ebbccee
+
+### Create Clothing Product
+POST {{url_dev}}/product
+Content-Type: application/json
+x-api-key: {{api_key}}
+x-client-id: {{client_id}}
+authorization: {{access_token}}
+
+{
+  "product_name": "Nike T-Shirt",
+  "product_thumb": "https://example.com/nike-tshirt.jpg",
+  "product_description": "Comfortable cotton T-shirt",
+  "product_price": 25,
+  "product_quantity": 100,
+  "product_type": "Clothing",
+  "product_shop": "66cd81b2f5b4c23e44f8c1a2",
+  "product_attributes": {
+    "brand": "Nike",
+    "size": "L",
+    "material": "Cotton"
+  }
+}
+
+### Create Electronic Product
+POST {{url_dev}}/product
+Content-Type: application/json
+x-api-key: {{api_key}}
+x-client-id: {{client_id}}
+authorization: {{access_token}}
+
+{
+  "product_name": "iPhone 15",
+  "product_thumb": "https://example.com/iphone15.jpg",
+  "product_description": "Latest Apple iPhone",
+  "product_price": 999,
+  "product_quantity": 50,
+  "product_type": "Electronics",
+  "product_shop": "66cd81b2f5b4c23e44f8c1a2",
+  "product_attributes": {
+    "manufacturer": "Apple",
+    "model": "iPhone 15 Pro",
+    "color": "Space Black"
+  }
+}
+
+### Invalid Product Type
+POST {{url_dev}}/product
+Content-Type: application/json
+x-api-key: {{api_key}}
+x-client-id: {{client_id}}
+authorization: {{access_token}}
+
+{
+  "product_name": "Weird Product",
+  "product_thumb": "https://example.com/weird.jpg",
+  "product_price": 10,
+  "product_quantity": 1,
+  "product_type": "Food",
+  "product_shop": "66cd81b2f5b4c23e44f8c1a2",
+  "product_attributes": {}
+}
 
 ### 🔄 Refresh Token
 POST {{url_dev}}/shop/handlerRefreshToken
