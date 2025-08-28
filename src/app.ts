@@ -1,5 +1,5 @@
 // src/app.ts
-import express, { Request, Response, NextFunction  } from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import helmet from 'helmet';
@@ -88,6 +88,7 @@ app.use((error: CustomError, req: Request, res: Response, next: NextFunction) =>
     res.status(statusCode).json({
         status: 'error',
         code: statusCode,
+        stack: error.stack,
         message: error.message || 'Internal server error',
     });
 });

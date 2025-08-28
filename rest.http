@@ -1,7 +1,27 @@
 @url_dev = http://localhost:3000/v1/api
 @api_key = 66e49c06973d0234b481d8d92b29555543c05482ada2ac9a059deeced2c8bd06ced6fc962d026550d9bdfc2a485fdd63c874cf51a02aceb34e16fccc733324f1
-@access_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGExNDU3ZTQzMWY0YTkzMWViYmNjZWUiLCJlbWFpbCI6InNob3BAZXhhbXBsZS5jb20iLCJpYXQiOjE3NTYzMDc5MjAsImV4cCI6MTc1NjQ4MDcyMH0.bnYJVplpVY_0Xzd2Ml3Ugd282kUi73VGvUS__r7lwDU
+@access_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGExNDU3ZTQzMWY0YTkzMWViYmNjZWUiLCJlbWFpbCI6InNob3BAZXhhbXBsZS5jb20iLCJpYXQiOjE3NTYzOTU5NjEsImV4cCI6MTc1NjU2ODc2MX0.19qZGnoGkzH3autKp7oI7aZdhqMKHJzn4aglnHkUF1E
 @client_id = 68a1457e431f4a931ebbccee
+@rtoken_id = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGExNDU3ZTQzMWY0YTkzMWViYmNjZWUiLCJlbWFpbCI6InNob3BAZXhhbXBsZS5jb20iLCJpYXQiOjE3NTYzOTY2MDAsImV4cCI6MTc1NzAwMTQwMH0.heJDFvDCplwEljCyw2JVFwyrQ8yY8TzY-PqTnTXV4h4
+
+### 🔄 Refresh Token
+POST {{url_dev}}/shop/handlerRefreshToken
+Content-Type: application/json
+x-api-key: {{api_key}}
+x-client-id: {{client_id}}
+x-rtoken-id:{{rtoken_id}}
+
+### 🔑 Login Shop
+POST {{url_dev}}/login
+Content-Type: application/json
+x-api-key: {{api_key}}
+Accept-Language: vi
+
+{
+  "email": "shop@example.com",
+  "password": "supersecure123"
+}
+
 
 ### Create Clothing Product
 POST {{url_dev}}/product
@@ -64,17 +84,6 @@ authorization: {{access_token}}
   "product_attributes": {}
 }
 
-### 🔄 Refresh Token
-POST {{url_dev}}/shop/handlerRefreshToken
-Content-Type: application/json
-x-api-key: {{api_key}}
-x-client-id: {{client_id}}
-authorization: {{access_token}}
-
-{
-  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGExNDU3ZTQzMWY0YTkzMWViYmNjZWUiLCJlbWFpbCI6InNob3BAZXhhbXBsZS5jb20iLCJpYXQiOjE3NTUzOTk3NTIsImV4cCI6MTc1NjAwNDU1Mn0.A9YaY2VAfJfXf71uMjLwFkN3wQpVCMniO_m9yvI3fys"
-}
-
 ### 🚪 Logout Shop
 POST {{url_dev}}/logout
 Content-Type: application/json
@@ -97,17 +106,6 @@ Accept-Language: vi
   "password": "supersecure123",
   "phone": "0123456789",
   "address": "123 Main Street"
-}
-
-### 🔑 Login Shop
-POST {{url_dev}}/login
-Content-Type: application/json
-x-api-key: {{api_key}}
-Accept-Language: vi
-
-{
-  "email": "shop@example.com",
-  "password": "supersecure123"
 }
 
 ### Get Hello

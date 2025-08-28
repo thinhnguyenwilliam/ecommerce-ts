@@ -15,48 +15,41 @@ interface LoginParams {
 }
 
 class AccessService {
-    static async handleRefreshToken(refreshToken: string) {
-        // 1. Check if refresh token has been used already
-        const foundRefreshToken = await keyTokenService.findByRefreshTokenUsed(refreshToken);
+    static async handleRefreshToken({
+        refreshToken,
+        user,
+        keyStore
+    }: {
+        refreshToken: string;
+        user: { userId: string; email: string };
+        keyStore: any;
+    }) {
+        const { userId, email } = user; // ✅ now we can use them
 
-        if (foundRefreshToken) {
-            // Decode who tried to reuse
-            const { userId, email } = verifyJWT(refreshToken, foundRefreshToken.privateKey) as {
-                userId: Types.ObjectId,
-                email: string
-            };
-            console.log("Reused refresh token by:", userId, email);
-
-            // Remove all keys for that user
-            await keyTokenService.deleteKeyById(userId);
-
+        // 1. Check if refresh token was already used
+        if (keyStore.refreshTokensUsed.includes(refreshToken)) {
+            await keyTokenService.deleteKeyByUserId(userId);
             throw new ForbiddenError("Something went wrong! Please login again.");
         }
 
-        // 2. If not used, check if it's valid
-        const holderToken = await keyTokenService.findByRefreshToken(refreshToken);
-        if (!holderToken) throw new AuthFailureError("Shop not registered");
+        // 2. Check if refreshToken matches current one in DB
+        if (keyStore.refreshToken !== refreshToken) {
+            throw new AuthFailureError("Shop not registered");
+        }
 
-        // Verify token with private key
-        const { userId, email } = verifyJWT(refreshToken, holderToken.privateKey) as {
-            userId: string,
-            email: string
-        };
-        console.log("[2] -- valid refresh token:", userId, email);
-
-        // Check shop exists
+        // 3. Ensure shop exists
         const foundShop = await shopService.findByEmail({ email });
         if (!foundShop) throw new AuthFailureError("Shop not registered");
 
-        // 3. Create new token pair
+        // 4. Create new token pair
         const tokens = await createTokenPair(
             { userId: foundShop._id as Types.ObjectId, email },
-            holderToken.publicKey,
-            holderToken.privateKey
+            keyStore.publicKey,
+            keyStore.privateKey
         );
 
-        // 4. Update token store
-        await holderToken.updateOne({
+        // 5. Update token store
+        await keyStore.updateOne({
             $set: { refreshToken: tokens.refreshToken },
             $addToSet: { refreshTokensUsed: refreshToken }
         });
@@ -66,6 +59,8 @@ class AccessService {
             tokens
         };
     }
+
+
 
     public static async logout(keyStore: any) {
         if (!keyStore?._id) {

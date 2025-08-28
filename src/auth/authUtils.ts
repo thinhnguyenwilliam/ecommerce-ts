@@ -12,7 +12,8 @@ export const verifyJWT = (token: string, keySecret: string) => {
 const HEADER = {
     API_KEY: 'x-api-key',
     CLIENT_ID: 'x-client-id',
-    AUTHORIZATION: 'authorization'
+    AUTHORIZATION: 'authorization',
+    REFRESHTOKEN: 'x-rtoken-id'
 };
 
 // Extend Express Request to store keyStore
@@ -20,8 +21,57 @@ declare module 'express-serve-static-core' {
     interface Request {
         keyStore?: any;
         user?: any;
+        refreshToken: string;
     }
 }
+
+// 🔹 Helper for RefreshToken (NOT middleware directly)
+const handleRefreshToken = async (req: any, keyStore: any) => {
+    const refreshToken = req.headers[HEADER.REFRESHTOKEN] as string;
+    if (!refreshToken) throw new AuthFailureError('Missing refreshToken');
+
+    const decodedUser = jwt.verify(refreshToken, keyStore.privateKey) as { userId: string };
+
+    if (req.headers[HEADER.CLIENT_ID] !== decodedUser.userId) {
+        throw new AuthFailureError('Invalid userId in refreshToken');
+    }
+
+    req.keyStore = keyStore;
+    req.user = decodedUser;
+    req.refreshToken = refreshToken;
+};
+
+// 🔹 Helper for AccessToken
+const handleAccessToken = async (req: any, keyStore: any) => {
+    const accessToken = req.headers[HEADER.AUTHORIZATION] as string;
+    if (!accessToken) throw new AuthFailureError('Missing accessToken');
+
+    const decodedUser = jwt.verify(accessToken, keyStore.publicKey) as { userId: string };
+
+    if (req.headers[HEADER.CLIENT_ID] !== decodedUser.userId) {
+        throw new AuthFailureError('Invalid userId in accessToken');
+    }
+
+    req.keyStore = keyStore;
+    req.user = decodedUser;
+};
+
+// 🔹 Middleware wrapper
+export const authenticationV2 = asyncHandler(async (req, res, next) => {
+    const userId = req.headers[HEADER.CLIENT_ID] as string;
+    if (!userId) throw new AuthFailureError('Invalid Request: Missing userId');
+
+    const keyStore = await keyTokenService.findByUserId(userId);
+    if (!keyStore) throw new NotFoundError('Not Found: keyStore');
+
+    if (req.headers[HEADER.REFRESHTOKEN]) {
+        await handleRefreshToken(req, keyStore);
+    } else {
+        await handleAccessToken(req, keyStore);
+    }
+
+    return next();
+});
 
 export const authentication = asyncHandler(async (req, res, next) => {
     // 1. Check if userId is provided
@@ -92,6 +142,7 @@ export const createTokenPair = async (
             console.log('✅ Token verified:', decoded);
         }
     });
+
 
     return {
         accessToken,

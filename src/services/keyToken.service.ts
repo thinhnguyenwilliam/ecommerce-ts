@@ -3,12 +3,17 @@ import { Key } from '../models/key-token.model';
 import { Types } from 'mongoose';
 
 class KeyTokenService {
-    public async findByRefreshToken(refreshToken: string) {
-        return await Key.findOne({ refreshToken: refreshToken });
+    public async deleteKeyByUserId(userId: string | Types.ObjectId) {
+        const objectId = typeof userId === "string" ? new Types.ObjectId(userId) : userId;
+        return await Key.findOneAndDelete({ user: objectId });
     }
-
+    
     public async deleteKeyById(userId: Types.ObjectId) {
         return await Key.findOneAndDelete({ user: userId });
+    }
+
+    public async findByRefreshToken(refreshToken: string) {
+        return await Key.findOne({ refreshToken: refreshToken });
     }
 
     public async findByRefreshTokenUsed(refreshToken: string) {
@@ -21,7 +26,7 @@ class KeyTokenService {
 
     public async findByUserId(userId: string | Types.ObjectId) {
         const objectId = typeof userId === 'string' ? new Types.ObjectId(userId) : userId;
-        return await Key.findOne({ user: objectId }).lean();
+        return await Key.findOne({ user: objectId });
     }
 
     /**

@@ -5,7 +5,11 @@ import { AccessService } from "../services/access.service";
 
 class AccessController {
     public async handlerRefreshToken(req: Request, res: Response, next: NextFunction) {
-        const result = await AccessService.handleRefreshToken(req.body.refreshToken);
+        const result = await AccessService.handleRefreshToken({
+            refreshToken: req.refreshToken,
+            user: req.user,
+            keyStore: req.keyStore
+        });
 
         return new SuccessResponse({
             message: "Get Token successful",

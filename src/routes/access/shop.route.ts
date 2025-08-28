@@ -3,7 +3,7 @@ import { Router } from 'express';
 import { shopController } from '../../controllers/shop.controller';
 import { accessController } from '../../controllers/access.controller';
 import { asyncHandler } from '../../middleware/handle-error';
-import { authentication } from '../../auth/authUtils';
+import { authentication, authenticationV2 } from '../../auth/authUtils';
 
 const router = Router();
 
@@ -19,7 +19,7 @@ router.post(
 );
 
 // Protected routes
-router.use(authentication);
+router.use(authenticationV2);
 
 router.post(
     '/logout',
