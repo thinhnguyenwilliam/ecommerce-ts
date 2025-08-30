@@ -8,7 +8,10 @@ class ProductController {
     public async createProduct(req: Request, res: Response): Promise<void> {
         const product = await ProductFactory.createProduct(
             req.body.product_type,
-            req.body
+            {
+                ...req.body,
+                product_shop: req.user.userId
+            }
         );
 
         new SuccessResponse({
