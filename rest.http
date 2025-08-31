@@ -1,6 +1,6 @@
 @url_dev = http://localhost:3000/v1/api
 @api_key = 66e49c06973d0234b481d8d92b29555543c05482ada2ac9a059deeced2c8bd06ced6fc962d026550d9bdfc2a485fdd63c874cf51a02aceb34e16fccc733324f1
-@access_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGExNDU3ZTQzMWY0YTkzMWViYmNjZWUiLCJlbWFpbCI6InNob3BAZXhhbXBsZS5jb20iLCJpYXQiOjE3NTY1MTM1NzYsImV4cCI6MTc1NjY4NjM3Nn0.xjaDD43TX-DSq2czjyWLgUEsZLKrISlpfLVDnyDeluo
+@access_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGExNDU3ZTQzMWY0YTkzMWViYmNjZWUiLCJlbWFpbCI6InNob3BAZXhhbXBsZS5jb20iLCJpYXQiOjE3NTY1OTg0ODAsImV4cCI6MTc1Njc3MTI4MH0.joLpPzLimAbXiPTNx163h44bHwSaYjT7g4vnprRt1n8
 @client_id = 68a1457e431f4a931ebbccee
 @rtoken_id = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGExNDU3ZTQzMWY0YTkzMWViYmNjZWUiLCJlbWFpbCI6InNob3BAZXhhbXBsZS5jb20iLCJpYXQiOjE3NTYzOTY2MDAsImV4cCI6MTc1NzAwMTQwMH0.heJDFvDCplwEljCyw2JVFwyrQ8yY8TzY-PqTnTXV4h4
 
@@ -23,7 +23,7 @@ Accept-Language: vi
 }
 
 
-### Create Clothing Product
+### Create Furniture Product
 POST {{url_dev}}/product
 Content-Type: application/json
 x-api-key: {{api_key}}
@@ -31,16 +31,16 @@ x-client-id: {{client_id}}
 authorization: {{access_token}}
 
 {
-  "product_name": "Nike T-Shirt",
+  "product_name": "Furniture 01",
   "product_thumb": "https://example.com/nike-tshirt.jpg",
-  "product_description": "Comfortable cotton T-shirt",
+  "product_description": "Comfortable cotton T-shirt Furniture",
   "product_price": 25,
   "product_quantity": 100,
-  "product_type": "Clothing",
+  "product_type": "Furniture",
   "product_attributes": {
-    "brand": "Nike",
-    "size": "L",
-    "material": "Cotton"
+    "brand": "Nike Furniture",
+    "size": "L Furniture",
+    "material": "Cotton Furniture"
   }
 }
 

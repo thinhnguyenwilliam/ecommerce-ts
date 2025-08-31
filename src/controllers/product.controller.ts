@@ -2,7 +2,7 @@
 
 import { Request, Response } from "express";
 import { SuccessResponse } from "../core/success.response";
-import ProductFactory from "../services/product.service";
+import ProductFactory from "../services/product.service.v2";
 
 class ProductController {
     public async createProduct(req: Request, res: Response): Promise<void> {
