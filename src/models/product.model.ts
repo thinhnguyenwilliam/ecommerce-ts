@@ -1,6 +1,6 @@
 // src/models/product.model.ts
 import { Schema, model, Document, Types } from "mongoose";
-
+import slugify from "slugify";
 // ------------------------
 // Interfaces for TypeScript
 // ------------------------
@@ -13,6 +13,11 @@ export interface IProduct extends Document {
     product_type: "Electronics" | "Clothing" | "Furniture";
     product_shop?: Types.ObjectId;
     product_attributes: Record<string, any>;
+    product_slug?: string;
+    product_ratingsAverage?: number;
+    isDraft?: boolean;
+    isPublished?: boolean;
+    product_variation?: string[];
 }
 
 // ------------------------
@@ -67,12 +72,31 @@ const productSchema = new Schema<IProduct>(
         },
         product_shop: { type: Schema.Types.ObjectId, ref: 'Shop' },
         product_attributes: { type: Schema.Types.Mixed, required: true },
+        product_slug: { type: String },
+        product_ratingsAverage: {
+            type: Number,
+            default: 4.5,
+            min: [1, 'Rating must be above 1.0'],
+            max: [5, 'Rating must be below 5.0'],
+            set: (val: number) => Math.round(val * 10) / 10
+        },
+        isDraft: { type: Boolean, default: true, index: true, select: true },
+        isPublished: { type: Boolean, default: false, index: true, select: true },
+        product_variation: { type: [String], default: [] },
     },
     {
         collection: COLLECTION_NAME,
         timestamps: true,
     }
 );
+
+// Middleware: generate slug before save
+productSchema.pre<IProduct>("save", function (next) {
+    if (this.isModified("product_name")) {
+        this.product_slug = slugify(this.product_name, { lower: true, strict: true });
+    }
+    next();
+});
 
 // ------------------------
 // Models
