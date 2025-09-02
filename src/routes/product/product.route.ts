@@ -15,4 +15,8 @@ router.post(
   asyncHandler((req, res) => new ProductController().createProduct(req, res))
 );
 
+router.get(
+  "/drafts/all",
+  asyncHandler((req, res) => new ProductController().getAllDraftsForShop(req, res))
+);
 export default router;
