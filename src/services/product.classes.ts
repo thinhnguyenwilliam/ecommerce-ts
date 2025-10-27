@@ -34,9 +34,20 @@ export class Product {
         this.product_attributes = product_attributes;
     }
 
+
+
+    async publishProductByShop({ product_shop, product_id }: { product_shop: string; product_id: string }) {
+        return await ProductRepo.publishProductByShop({ product_shop, product_id });
+    }
+
     async createProduct(product_id?: Types.ObjectId | string) {
         return await ProductModel.create({ ...this, _id: product_id });
     }
+
+    // async findAllisPublishForShop({ limit = 50, skip = 0 }: { limit?: number; skip?: number }) {
+    //     const query = { product_shop: this.product_shop, isPublished: true };
+    //     return await ProductRepo.publishProductForShop({ query, limit, skip });
+    // }
 
     // 👉 method này gọi xuống repository
     async findAllDraftsForShop({ limit = 50, skip = 0 }: { limit?: number; skip?: number }) {

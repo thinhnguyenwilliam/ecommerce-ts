@@ -25,9 +25,9 @@ class ProductFactory {
 }
 
 // --- load registry ---
-Object.entries(productRegistry).forEach(([type, classRef]) => {
+for (const [type, classRef] of Object.entries(productRegistry)) {
     console.log("[2---] [REGISTER]", type, classRef?.name);
     ProductFactory.registerProductType(type, classRef);
-});
+}
 
 export default ProductFactory;
