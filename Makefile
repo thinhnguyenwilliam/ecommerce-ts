@@ -33,7 +33,7 @@ install:
 # -------------------------
 .PHONY: dev
 dev:
-	@echo "🚀 Starting development server..."
+	@echo "Starting development server..."
 	@npm run dev
 
 # -------------------------
@@ -41,7 +41,7 @@ dev:
 # -------------------------
 .PHONY: build
 build:
-	@echo "🏗️ Building project..."
+	@echo "Building project..."
 	@npm run build
 
 # -------------------------

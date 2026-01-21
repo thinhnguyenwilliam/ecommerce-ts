@@ -1,5 +1,6 @@
 // src/app.ts
 import express, { Request, Response, NextFunction } from 'express';
+import { register } from "./metrics";
 import cors from 'cors';
 import morgan from 'morgan';
 import helmet from 'helmet';
@@ -7,7 +8,9 @@ import compression from 'compression';
 import i18next from "i18next";
 import Backend from "i18next-fs-backend";
 import middleware from "i18next-http-middleware";
-import path from "path";
+import path from "node:path";
+import routerGeneral from './routes';
+
 
 // 1. i18next configuration
 i18next
@@ -26,6 +29,13 @@ i18next
 
 const app = express();
 
+
+// Metrics endpoint for Prometheus to scrape
+//http://localhost:3000/metrics
+// app.get("/metrics", async (req: Request, res: Response) => {
+//     res.setHeader("Content-Type", register.contentType);
+//     res.end(await register.metrics());
+// });
 
 // 2. Use i18next middleware
 app.use(middleware.handle(i18next));
@@ -66,7 +76,7 @@ app.use(express.json()); // Parse incoming JSON requests
 app.use(express.urlencoded({ extended: true }));
 // ---- End middleware
 
-import routerGeneral from './routes';
+
 app.use('/', routerGeneral);
 
 // handling error
@@ -81,6 +91,8 @@ app.use((req: Request, res: Response, next: NextFunction) => {
     error.status = 404;
     next(error);
 });
+
+
 
 // Error handler middleware
 app.use((error: CustomError, req: Request, res: Response, next: NextFunction) => {

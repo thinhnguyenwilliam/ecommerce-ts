@@ -1,7 +1,7 @@
 //src/helpers/db.utils.ts
 import mongoose from 'mongoose';
-import os from 'os';
-import process from 'process';
+import os from 'node:os';
+import process from 'node:process';
 const _SECONDS = 5000;
 
 export const countConnect = () => {

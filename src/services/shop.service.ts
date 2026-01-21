@@ -1,7 +1,7 @@
 // src/services/shop.service.ts
 import { Shop } from '../models/shop.model';
 import bcrypt from 'bcrypt';
-import crypto from 'crypto';
+import crypto from 'node:crypto';
 import { keyTokenService } from './keyToken.service';
 import { Types } from 'mongoose';
 import { createTokenPair } from '../auth/authUtils';

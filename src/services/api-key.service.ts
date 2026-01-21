@@ -1,5 +1,5 @@
 // src/service/api-key.service.ts
-import crypto from 'crypto';
+import crypto from 'node:crypto';
 import ApiKeyModel from '../models/api-key.model';
 
 /**

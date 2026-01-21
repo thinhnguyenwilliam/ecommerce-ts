@@ -1,18 +1,19 @@
 // src/config/db.ts
+
+// singleton pattern: 
+
 import mongoose from 'mongoose';
-import dotenv from 'dotenv';
 import { countConnect } from '../helpers/db.utils';
-import config from './environment';
 
-dotenv.config();
 
-const dbURI = `mongodb://${config.db.host}:${config.db.port}/${config.db.name}`;
+const dbURI = process.env.DEV_MONGO_URI!;
 
 class Database {
-    private static instance: Database;
+    private static instance: Database; //static instance ensures only one instance exists
 
     private constructor() {
         // Constructor does nothing async
+        // private constructor: prevents new Database() from outside
     }
 
     private async connect(): Promise<void> {
@@ -24,9 +25,8 @@ class Database {
                 serverSelectionTimeoutMS: 5000, // Fail fast if server not found
                 socketTimeoutMS: 45000,         // Timeout for long-running queries
             });
-            console.log(`🔗 MongoDB URI: ${dbURI}`);
-            console.log('✅ Connected to MongoDB');
-            
+            console.log('🔗 MongoDB connected');
+
             // Optional: use your monitoring function
             countConnect(); // Logs the current connection state
         } catch (err) {
@@ -35,14 +35,24 @@ class Database {
         }
     }
 
-    public static async init(): Promise<Database> {
+    private static connecting: Promise<Database> | null = null;
+
+    public static init(): Promise<Database> {
         if (!Database.instance) {
-            const db = new Database();
-            await db.connect();
-            Database.instance = db;
+            Database.connecting ??= (async () => {
+                const db = new Database();
+                await db.connect();
+                Database.instance = db;
+                return db;
+            })();
+
+            return Database.connecting;
         }
-        return Database.instance;
+
+        return Promise.resolve(Database.instance);
     }
+
+
 }
 
 export default Database;

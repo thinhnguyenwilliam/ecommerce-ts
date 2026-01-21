@@ -1,4 +1,5 @@
 // src/server.ts
+import { httpRequestCounter } from "./metrics";
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 dotenv.config();
@@ -22,6 +23,28 @@ Database.init().then(() => {
 });
 
 //checkOverload(); // Start system monitoring
+
+//when dockerfile
+// const PORT = process.env.PORT || 3000;
+// const MONGO_URI = process.env.MONGO_URI || "mongodb://mongo:27017/monitoringdb";
+
+// Connect to MongoDB
+// mongoose.connect(MONGO_URI)
+//     .then(() => console.log("✅ Connected to MongoDB"))
+//     .catch(err => console.error("❌ MongoDB connection error:", err));
+
+// Prometheus metrics middleware
+// app.use((req, res, next) => {
+//     res.on("finish", () => {
+//         httpRequestCounter.inc({
+//             method: req.method,
+//             route: req.route ? req.route.path : req.path,
+//             status_code: res.statusCode,
+//         });
+//     });
+//     next();
+// });
+//
 
 // Graceful shutdown
 process.on('SIGINT', async () => {
