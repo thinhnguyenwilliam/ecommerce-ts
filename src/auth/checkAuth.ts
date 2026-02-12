@@ -15,7 +15,7 @@ export const permission = (permission: string) => {
             });
         }
 
-        console.log('Permissions are:', req.objKey.permissions);
+        //console.log('Permissions are:', req.objKey.permissions);
         return next();
     };
 };
@@ -39,8 +39,8 @@ export const apiKey = async (req: Request, res: Response, next: NextFunction) =>
             });
         }
         //start just for test to get key to assign in rest.http
-        const newKey = await createApiKey(['0000', '1111']);
-        console.log('Generated API Key:', newKey.key);
+        // const newKey = await createApiKey(['2222', '3333']);
+        // console.log('Generated API Key:', newKey.key);
         //end just for test
 
         const objKey = await findByKey(key);

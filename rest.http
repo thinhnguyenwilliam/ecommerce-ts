@@ -1,5 +1,5 @@
 @url_dev = http://localhost:3000/v1/api
-@api_key = 73225bf8e224706b9c9ad839b16489278446985eebf8ff098bcbcc351944e05e8eb95ec3386ccca3e9df57ebaafb627f4473264a44c520d29b1d82e7aece089e
+@api_key = 938d713257ea8323a0152bd8b2ea7f5f63bd76fb10d1a6d97ee44fee1747895ce032cb0b4e8d6d06e6b76d0dd9f14e46bdb8c4fa1a81691b9ec029a32a8806c7
 @access_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGExNDU3ZTQzMWY0YTkzMWViYmNjZWUiLCJlbWFpbCI6InNob3BAZXhhbXBsZS5jb20iLCJpYXQiOjE3NjA3Nzc0OTksImV4cCI6MTc2MDk1MDI5OX0.2Td4A_kZyWGTDEeHOXh0ipoOnlmbiAmONMWkHHC0Ea0
 @client_id = 68a1457e431f4a931ebbccee
 @rtoken_id = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGExNDU3ZTQzMWY0YTkzMWViYmNjZWUiLCJlbWFpbCI6InNob3BAZXhhbXBsZS5jb20iLCJpYXQiOjE3NTYzOTY2MDAsImV4cCI6MTc1NzAwMTQwMH0.heJDFvDCplwEljCyw2JVFwyrQ8yY8TzY-PqTnTXV4h4
@@ -105,8 +105,8 @@ x-api-key: {{api_key}}
 Accept-Language: vi
 
 {
-  "name": "My Shop1",
-  "email": "shop1@example.com",
+  "name": "My Shop3",
+  "email": "shop3@example.com",
   "password": "supersecure123",
   "phone": "0123456789",
   "address": "123 Main Street"
@@ -114,6 +114,7 @@ Accept-Language: vi
 
 ### Get Hello
 GET http://localhost:3000/
+x-api-key: {{api_key}}
 
 ### Create Item
 POST http://localhost:3000/items

@@ -87,7 +87,7 @@ interface CustomError extends Error {
 
 // 404 handler: Runs only if no route matches.
 app.use((req: Request, res: Response, next: NextFunction) => {
-    const error: CustomError = new Error('Not Found');
+    const error: CustomError = new Error('Not Found This Url');
     error.status = 404;
     next(error);
 });
