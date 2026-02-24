@@ -29,13 +29,7 @@ class KeyTokenService {
         return await Key.findOne({ user: objectId });
     }
 
-    /**
-     * Creates or updates a key token document for a user.
-     * @param userId MongoDB ObjectId for the user
-     * @param publicKey Public key string
-     * @param privateKey Private key string
-     * @param refreshToken Current refresh token
-     */
+
     public async createKeyToken(
         userId: Types.ObjectId,
         publicKey: string,

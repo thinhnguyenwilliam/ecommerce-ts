@@ -1,28 +1,22 @@
-# -------------------------
-# Makefile for ecommerce-ts
-# -------------------------
 
-# Variables
+# ecommerce-ts/Makefile
 NODE_MODULES := node_modules
 SRC := src
 DIST := dist
 
-# Default target
-.PHONY: help
-help:
-	@echo ""
-	@echo "Available commands:"
-	@echo "  make install       - Install all dependencies"
-	@echo "  make dev           - Run development server (ts-node-dev)"
-	@echo "  make build         - Compile TypeScript to JavaScript"
-	@echo "  make start         - Run built project from dist/"
-	@echo "  make clean         - Remove dist and build artifacts"
-	@echo "  make reinstall     - Clean node_modules and reinstall"
-	@echo ""
+.PHONY: docker-up docker-down docker-restart
 
-# -------------------------
-# Install dependencies
-# -------------------------
+docker-up:
+	docker compose up -d
+
+docker-down:
+	docker compose down
+
+docker-restart:
+	docker compose down
+	docker compose up -d
+
+
 .PHONY: install
 install:
 	@echo "📦 Installing dependencies..."
