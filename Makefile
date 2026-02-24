@@ -5,8 +5,17 @@ DIST := dist
 
 .PHONY: docker-up docker-down docker-restart kafka-up kafka-down \
 		kafka-topic-create kafka-topic-list kafka-producer-test \
-		kafka-topic-describe
+		kafka-topic-describe kafka-consumer-test rabbitmq-up \
+		rabbitmq-producer-test rabbitmq-consumer-test
 
+rabbitmq-consumer-test:
+	npx ts-node src/tests/message_queue/rabbitmq/consumer.ts
+
+rabbitmq-producer-test:
+	npx ts-node src/tests/message_queue/rabbitmq/producer.ts
+
+rabbitmq-up:
+	docker compose -f docker/docker-compose.rabbitmq.yml up -d
 
 kafka-topic-create:
 	docker exec -it ecommerce-kafka \
@@ -33,6 +42,8 @@ kafka-topic-list:
 kafka-producer-test:
 	npx ts-node src/tests/message_queue/kafka/producer.ts
 
+kafka-consumer-test:
+	npx ts-node src/tests/message_queue/kafka/consumer.ts
 
 kafka-up:
 	docker compose -f docker/docker-compose.kafka.yml up -d
