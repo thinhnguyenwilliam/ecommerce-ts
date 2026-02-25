@@ -59,7 +59,7 @@ const handleAccessToken = async (req: any, keyStore: any) => {
 // 🔹 Middleware wrapper
 export const authenticationV2 = asyncHandler(async (req, res, next) => {
     const userId = req.headers[HEADER.CLIENT_ID] as string;
-    if (!userId) throw new AuthFailureError('Invalid Request: Missing userId');
+    if (!userId) throw new AuthFailureError('Invalid Request authenticationV2: Missing userId');
 
     const keyStore = await keyTokenService.findByUserId(userId);
     if (!keyStore) throw new NotFoundError('Not Found: keyStore');

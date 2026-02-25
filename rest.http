@@ -1,8 +1,9 @@
 @url_dev = http://localhost:3000/v1/api
 @api_key = 772531352f80e84980f3b5438c77d59de0d15d6acee5f94de023721e4280dd6588781d9d4ba85890da38967c2726c9a3a7f9f98420397f49f3242fed4c8344a9
-@access_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGExNDU3ZTQzMWY0YTkzMWViYmNjZWUiLCJlbWFpbCI6InNob3BAZXhhbXBsZS5jb20iLCJpYXQiOjE3NjA3Nzc0OTksImV4cCI6MTc2MDk1MDI5OX0.2Td4A_kZyWGTDEeHOXh0ipoOnlmbiAmONMWkHHC0Ea0
+@access_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTlkNTllMmY5Y2VkMzBmODA5NDU2ZDEiLCJlbWFpbCI6InNob3AzQGV4YW1wbGUuY29tIiwiaWF0IjoxNzcxOTk0MzE1LCJleHAiOjE3NzIxNjcxMTV9.bHJPTdOQFhRKfIvX3Fe_kbgetrXxtCBBtOqJN9O96WE
 @client_id = 68a1457e431f4a931ebbccee
 @rtoken_id = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGExNDU3ZTQzMWY0YTkzMWViYmNjZWUiLCJlbWFpbCI6InNob3BAZXhhbXBsZS5jb20iLCJpYXQiOjE3NTYzOTY2MDAsImV4cCI6MTc1NzAwMTQwMH0.heJDFvDCplwEljCyw2JVFwyrQ8yY8TzY-PqTnTXV4h4
+
 
 ### 📋 Get Draft Products (shop)
 GET {{url_dev}}/product/drafts/all?limit=10&skip=0
@@ -24,7 +25,7 @@ x-api-key: {{api_key}}
 Accept-Language: vi
 
 {
-  "email": "shop@example.com",
+  "email": "shop3@example.com",
   "password": "supersecure123"
 }
 

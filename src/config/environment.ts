@@ -14,6 +14,12 @@ interface AppConfig {
   rabbitmq: {
     url: string;
   };
+  aws: {
+    region: string;
+    s3Bucket: string;
+    accessKeyId: string;
+    secretAccessKey: string;
+  };
 }
 
 const dev: AppConfig = {
@@ -27,6 +33,12 @@ const dev: AppConfig = {
   },
   rabbitmq: {
     url: process.env.RABBITMQ_URL || "",
+  },
+  aws: {
+    region: process.env.AWS_REGION || "ap-southeast-1",
+    s3Bucket: process.env.AWS_S3_BUCKET || "",
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID || "",
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || "",
   },
 };
 
@@ -42,6 +54,12 @@ const prod: AppConfig = {
   rabbitmq: {
     url: process.env.RABBITMQ_URL || "",
   },
+  aws: {
+    region: process.env.AWS_REGION || "ap-southeast-1",
+    s3Bucket: process.env.AWS_S3_BUCKET || "",
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID || "",
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || "",
+  },
 };
 
 const test: AppConfig = {
@@ -55,6 +73,12 @@ const test: AppConfig = {
   },
   rabbitmq: {
     url: process.env.RABBITMQ_URL || "",
+  },
+  aws: {
+    region: process.env.AWS_REGION || "ap-southeast-1",
+    s3Bucket: process.env.AWS_S3_BUCKET || "",
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID || "",
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || "",
   },
 };
 

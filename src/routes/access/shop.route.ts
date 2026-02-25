@@ -19,7 +19,7 @@ router.post(
 );
 
 // Protected routes
-router.use(authenticationV2);
+//router.use(authenticationV2);
 
 router.post(
     '/logout',
