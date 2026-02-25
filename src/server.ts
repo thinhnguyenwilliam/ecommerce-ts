@@ -1,4 +1,5 @@
 // src/server.ts
+import { startMessageConsumer } from "./services/consumerQueue.service";
 import { httpRequestCounter } from "./metrics";
 import mongoose from 'mongoose';
 import config from "./config/environment";
@@ -6,6 +7,11 @@ import config from "./config/environment";
 
 import app from './app';
 import Database from './config/db';
+
+// Consumer chạy nền, không block HTTP server.
+(async () => {
+  await startMessageConsumer();
+})();
 
 const PORT = config.app.port;
 

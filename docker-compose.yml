@@ -1,5 +1,5 @@
 # /home/thinh/WorkSpace/ecommerce-ts/docker-compose.yml
-# http://localhost:8081
+# http://192.168.1.8:8081/
 # docker network create ecommerce-net
 
 services:
