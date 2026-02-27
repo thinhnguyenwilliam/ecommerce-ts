@@ -5,6 +5,21 @@
 @rtoken_id = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGExNDU3ZTQzMWY0YTkzMWViYmNjZWUiLCJlbWFpbCI6InNob3BAZXhhbXBsZS5jb20iLCJpYXQiOjE3NTYzOTY2MDAsImV4cCI6MTc1NzAwMTQwMH0.heJDFvDCplwEljCyw2JVFwyrQ8yY8TzY-PqTnTXV4h4
 
 
+### 📦 Create Shop
+### POST {{url_dev}}/shop/sign-up?lang=vi # can use this but i like header "Accept-Language: vi" instead
+POST {{url_dev}}/shop/sign-up
+Content-Type: application/json
+x-api-key: {{api_key}}
+Accept-Language: vi
+
+{
+  "name": "My Shop3",
+  "email": "shop3@example.com",
+  "password": "supersecure123",
+  "phone": "0123456789",
+  "address": "123 Main Street"
+}
+
 ### 📋 Get Draft Products (shop)
 GET {{url_dev}}/product/drafts/all?limit=10&skip=0
 x-api-key: {{api_key}}
@@ -98,20 +113,7 @@ x-client-id: {{client_id}}
 authorization: {{access_token}}
 
 
-### 📦 Create Shop
-### POST {{url_dev}}/shop/sign-up?lang=vi # can use this but i like header "Accept-Language: vi" instead
-POST {{url_dev}}/shop/sign-up
-Content-Type: application/json
-x-api-key: {{api_key}}
-Accept-Language: vi
 
-{
-  "name": "My Shop3",
-  "email": "shop3@example.com",
-  "password": "supersecure123",
-  "phone": "0123456789",
-  "address": "123 Main Street"
-}
 
 ### Get Hello
 GET http://localhost:3000/
