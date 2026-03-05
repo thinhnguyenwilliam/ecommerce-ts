@@ -1,18 +1,17 @@
 // ecommerce-ts/src/services/upload.service.ts
-import {
-  PutObjectCommand,
-  GetObjectCommand,
-} from "@aws-sdk/client-s3";
-import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import { PutObjectCommand } from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/cloudfront-signer";
 import s3Client from "../config/s3.config";
 import config from "../config/environment";
+
+const urlImagePublic = `https://d1t1zve9xnspsc.cloudfront.net`;
 
 export const uploadToS3 = async (
   buffer: Buffer,
   key: string,
   contentType: string
 ) => {
-  // Upload
+
   await s3Client.send(
     new PutObjectCommand({
       Bucket: config.aws.s3Bucket,
@@ -22,15 +21,17 @@ export const uploadToS3 = async (
     })
   );
 
-  // Signed URL để xem ảnh
-  const getCommand = new GetObjectCommand({
-    Bucket: config.aws.s3Bucket,
-    Key: key,
+  const cloudfrontUrl = `${urlImagePublic}/${key}`;
+
+  const signedUrl = getSignedUrl({
+    url: cloudfrontUrl,
+    keyPairId: config.aws.cloudfrontKeyPairId,
+    privateKey: config.aws.cloudfrontPrivateKey,
+    dateLessThan: new Date(Date.now() + 60 * 60 * 1000).toISOString(),
   });
 
-  const signedUrl = await getSignedUrl(s3Client, getCommand, {
-    expiresIn: 60 * 60, // 1 giờ
-  });
-
-  return { signedUrl };
+  return {
+    url: cloudfrontUrl,
+    signedUrl,
+  };
 };

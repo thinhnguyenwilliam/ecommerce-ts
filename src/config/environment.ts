@@ -19,6 +19,8 @@ interface AppConfig {
     s3Bucket: string;
     accessKeyId: string;
     secretAccessKey: string;
+    cloudfrontKeyPairId: string;
+    cloudfrontPrivateKey: string;
   };
 }
 
@@ -39,6 +41,8 @@ const dev: AppConfig = {
     s3Bucket: process.env.AWS_S3_BUCKET || "",
     accessKeyId: process.env.AWS_ACCESS_KEY_ID || "",
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || "",
+    cloudfrontKeyPairId:process.env.CLOUDFRONT_KEY_PAIR_ID || "",
+    cloudfrontPrivateKey:process.env.CLOUDFRONT_PRIVATE_KEY || "",
   },
 };
 
@@ -59,6 +63,8 @@ const prod: AppConfig = {
     s3Bucket: process.env.AWS_S3_BUCKET || "",
     accessKeyId: process.env.AWS_ACCESS_KEY_ID || "",
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || "",
+    cloudfrontKeyPairId:process.env.CLOUDFRONT_KEY_PAIR_ID || "",
+    cloudfrontPrivateKey:process.env.CLOUDFRONT_PRIVATE_KEY || "",
   },
 };
 
@@ -79,6 +85,8 @@ const test: AppConfig = {
     s3Bucket: process.env.AWS_S3_BUCKET || "",
     accessKeyId: process.env.AWS_ACCESS_KEY_ID || "",
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || "",
+    cloudfrontKeyPairId:process.env.CLOUDFRONT_KEY_PAIR_ID || "",
+    cloudfrontPrivateKey:process.env.CLOUDFRONT_PRIVATE_KEY || "",
   },
 };
 

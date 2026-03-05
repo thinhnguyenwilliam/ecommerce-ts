@@ -27,3 +27,5 @@ Thumbs.db
 
 # Optional: Coverage reports (if you use Jest or nyc)
 coverage/
+
+keys/

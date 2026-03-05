@@ -2,11 +2,17 @@
 NODE_MODULES := node_modules
 SRC := src
 DIST := dist
+KEYS_FOLDER := src/keys
 
 .PHONY: docker-up docker-down docker-restart kafka-up kafka-down \
 		kafka-topic-create kafka-topic-list kafka-producer-test \
 		kafka-topic-describe kafka-consumer-test rabbitmq-up \
-		rabbitmq-producer-test rabbitmq-consumer-test
+		rabbitmq-producer-test rabbitmq-consumer-test generate-key
+
+generate-key:
+	mkdir -p $(KEYS_FOLDER)
+	openssl genrsa -out $(KEYS_FOLDER)/private_key.pem 2048
+	openssl rsa -in $(KEYS_FOLDER)/private_key.pem -pubout -out $(KEYS_FOLDER)/public_key.pem
 
 rabbitmq-consumer-test:
 	npx ts-node src/tests/message_queue/rabbitmq/consumer.ts
