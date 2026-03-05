@@ -44,7 +44,8 @@ app.use(middleware.handle(i18next));
 app.use(cors({
     origin: [
         'http://localhost:4200',
-        'https://yourdomain.com'
+        'https://yourdomain.com',
+        'http://192.168.1.5',
     ],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true

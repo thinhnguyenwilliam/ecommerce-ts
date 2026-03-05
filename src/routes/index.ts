@@ -8,6 +8,8 @@ import { apiKey, permission } from '../auth/checkAuth';
 
 const router = Router();
 
+
+
 // 1️⃣ First, check API Key for all routes under /v1/api
 router.use(apiKey);
 
@@ -16,8 +18,8 @@ router.use(apiKey);
 router.use(permission('0000'));
 
 // 3️⃣ Mount the actual feature routes
-router.use('/v1/api/product', productRouter);
 router.use('/v1/api', shopRouter);
+router.use('/v1/api/product', productRouter);
 router.use('/v1/api', uploadRouter);
 
 export default router;

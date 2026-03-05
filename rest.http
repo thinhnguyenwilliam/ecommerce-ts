@@ -1,9 +1,10 @@
 @url_dev = http://localhost:3000/v1/api
-@api_key = 73225bf8e224706b9c9ad839b16489278446985eebf8ff098bcbcc351944e05e8eb95ec3386ccca3e9df57ebaafb627f4473264a44c520d29b1d82e7aece089e
+@api_key = 0503bd96c8b8d2956020957b4ae5b4ea5ff588fc3a885f5c4498663075e524e442b2b243f5bf09f22e0f31ae335f175dc6c27da0bdf90508addb4c23b226090d
 @access_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTlkNTllMmY5Y2VkMzBmODA5NDU2ZDEiLCJlbWFpbCI6InNob3AzQGV4YW1wbGUuY29tIiwiaWF0IjoxNzcxOTk0MzE1LCJleHAiOjE3NzIxNjcxMTV9.bHJPTdOQFhRKfIvX3Fe_kbgetrXxtCBBtOqJN9O96WE
 @client_id = 68a1457e431f4a931ebbccee
 @rtoken_id = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGExNDU3ZTQzMWY0YTkzMWViYmNjZWUiLCJlbWFpbCI6InNob3BAZXhhbXBsZS5jb20iLCJpYXQiOjE3NTYzOTY2MDAsImV4cCI6MTc1NzAwMTQwMH0.heJDFvDCplwEljCyw2JVFwyrQ8yY8TzY-PqTnTXV4h4
-
+# sudo lsof -i :3000
+# sudo kill -9 <PID>
 
 ### 📦 Create Shop
 ### POST {{url_dev}}/shop/sign-up?lang=vi # can use this but i like header "Accept-Language: vi" instead
@@ -13,11 +14,22 @@ x-api-key: {{api_key}}
 Accept-Language: vi
 
 {
-  "name": "My Shop3",
-  "email": "shop3@example.com",
+  "name": "My Shop7",
+  "email": "shop7@example.com",
   "password": "supersecure123",
   "phone": "0123456789",
   "address": "123 Main Street"
+}
+
+### 🔑 Login Shop
+POST {{url_dev}}/login
+Content-Type: application/json
+x-api-key: {{api_key}}
+Accept-Language: vi
+
+{
+  "email": "shop7@example.com",
+  "password": "supersecure123"
 }
 
 ### 📋 Get Draft Products (shop)
@@ -33,16 +45,7 @@ x-api-key: {{api_key}}
 x-client-id: {{client_id}}
 x-rtoken-id:{{rtoken_id}}
 
-### 🔑 Login Shop
-POST {{url_dev}}/login
-Content-Type: application/json
-x-api-key: {{api_key}}
-Accept-Language: vi
 
-{
-  "email": "shop3@example.com",
-  "password": "supersecure123"
-}
 
 
 ### Create Furniture Product

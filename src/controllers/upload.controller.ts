@@ -5,6 +5,7 @@ import { SuccessResponse } from "../core/success.response";
 
 class UploadController {
     uploadImageFromLocalS3 = async (req: Request, res: Response) => {
+
         try {
             if (!req.file) {
                 return res.status(400).json({
