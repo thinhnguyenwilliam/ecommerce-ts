@@ -4,9 +4,15 @@ import { httpRequestCounter } from "./metrics";
 import mongoose from 'mongoose';
 import config from "./config/environment";
 //import { checkOverload } from './helpers/db.utils';
-
 import app from './app';
 import Database from './config/db';
+import redisPubSubService from "./services/redisPubSub.service";
+import inventoryServiceTest from "./tests/inventory.test";
+
+(async () => {
+  await redisPubSubService.connect();
+  await inventoryServiceTest.init();
+})();
 
 // Consumer chạy nền, không block HTTP server.
 (async () => {

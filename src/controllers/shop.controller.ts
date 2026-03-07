@@ -2,11 +2,16 @@
 import { Request, Response } from 'express';
 import { shopService } from '../services/shop.service';
 import { CREATED } from '../core/success.response';
+import productServiceTest from "../tests/product.test";
 
 class ShopController {
     public async signUp(req: Request, res: Response): Promise<void> {
         const t = req.t; // Extract the translator function from request
         const { name, email, password, phone, address } = req.body;
+
+        // just test redis pubsub
+        await productServiceTest.purchaseProduct("p1", 2);
+        //
 
         // TODO: validate input, hash password, check for duplicates, save to DB
         //console.log('📥 Shop sign-up request:', req.body);
