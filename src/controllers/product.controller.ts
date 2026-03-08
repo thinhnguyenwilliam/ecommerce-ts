@@ -18,6 +18,7 @@ class ProductController {
     }
 
     public async createProduct(req: Request, res: Response): Promise<void> {
+        console.log("1---")
         const product = await ProductFactory.createProduct(
             req.body.product_type,
             {

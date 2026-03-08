@@ -1,8 +1,8 @@
 @url_dev = http://localhost:3000/v1/api
-@api_key = cf49e0c608bb1ae18bc8e03afa439999eec7073ddc4c410cdb02f723dc5fa6521d6dbde32868383ec8fe2c1be1de222e8a6af088b8e532bb85e9aef8febc8d28
-@access_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTlkNTllMmY5Y2VkMzBmODA5NDU2ZDEiLCJlbWFpbCI6InNob3AzQGV4YW1wbGUuY29tIiwiaWF0IjoxNzcxOTk0MzE1LCJleHAiOjE3NzIxNjcxMTV9.bHJPTdOQFhRKfIvX3Fe_kbgetrXxtCBBtOqJN9O96WE
-@client_id = 68a1457e431f4a931ebbccee
-@rtoken_id = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGExNDU3ZTQzMWY0YTkzMWViYmNjZWUiLCJlbWFpbCI6InNob3BAZXhhbXBsZS5jb20iLCJpYXQiOjE3NTYzOTY2MDAsImV4cCI6MTc1NzAwMTQwMH0.heJDFvDCplwEljCyw2JVFwyrQ8yY8TzY-PqTnTXV4h4
+@api_key = 3eb5d56608d4645a0f521a9947ff3cc1fac7c6766f42734c1a53dd48501cbef52b46525a80f9abb8d774f8b7eae6e3c24c3c2f67ca72e5dd8cfa4a5d6de33aa0
+@access_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OWFiOTA2NTUzMGFkZjJjNzc5ZTViOTciLCJlbWFpbCI6InNob3A3QGV4YW1wbGUuY29tIiwiaWF0IjoxNzcyOTYxOTg0LCJleHAiOjE3NzMxMzQ3ODR9.t0nIZs-bKtjOU1t_LNGWIU2QArxbvIUOSyj3AEbONSI
+@client_id = 69ab9065530adf2c779e5b97
+@rtoken_id = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OWFiOTA2NTUzMGFkZjJjNzc5ZTViOTciLCJlbWFpbCI6InNob3A3QGV4YW1wbGUuY29tIiwiaWF0IjoxNzcyOTYxOTg0LCJleHAiOjE3NzM1NjY3ODR9.-q0nraJc9ArNaqwtOF0v-BvUWXI6eQBQMND4lyh81tE
 # sudo lsof -i :3000
 # sudo kill -9 <PID>
 
@@ -14,8 +14,8 @@ x-api-key: {{api_key}}
 Accept-Language: vi
 
 {
-  "name": "My Shop7",
-  "email": "shop7@example.com",
+  "name": "My Shop8",
+  "email": "shop8@example.com",
   "password": "supersecure123",
   "phone": "0123456789",
   "address": "123 Main Street"
