@@ -1,10 +1,34 @@
 @url_dev = http://localhost:3000/v1/api
-@api_key = 3eb5d56608d4645a0f521a9947ff3cc1fac7c6766f42734c1a53dd48501cbef52b46525a80f9abb8d774f8b7eae6e3c24c3c2f67ca72e5dd8cfa4a5d6de33aa0
-@access_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OWFiOTA2NTUzMGFkZjJjNzc5ZTViOTciLCJlbWFpbCI6InNob3A3QGV4YW1wbGUuY29tIiwiaWF0IjoxNzcyOTYxOTg0LCJleHAiOjE3NzMxMzQ3ODR9.t0nIZs-bKtjOU1t_LNGWIU2QArxbvIUOSyj3AEbONSI
-@client_id = 69ab9065530adf2c779e5b97
-@rtoken_id = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OWFiOTA2NTUzMGFkZjJjNzc5ZTViOTciLCJlbWFpbCI6InNob3A3QGV4YW1wbGUuY29tIiwiaWF0IjoxNzcyOTYxOTg0LCJleHAiOjE3NzM1NjY3ODR9.-q0nraJc9ArNaqwtOF0v-BvUWXI6eQBQMND4lyh81tE
+@api_key = bb6a9607bec843b8b296aecbc76726a4e4d9ea1e528186a40c93d3ae3ef54f3a6c97695a9d23f7642c653c3f79006489cfb4f7c584276a8e28c1e866c87b0b6f
+@access_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OWFkNDQ0NDFlZTZlOTZlODVmNjZlNzEiLCJlbWFpbCI6InNob3A4QGV4YW1wbGUuY29tIiwicm9sZXMiOlsiU0hPUCJdLCJpYXQiOjE3NzI5NjI4ODQsImV4cCI6MTc3MzEzNTY4NH0.WYxIlUSUdrclaIbvIyBPFIza9KrwPx88j1OEoANwN8Y
+@client_id = 69ad44441ee6e96e85f66e71
+@rtoken_id = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OWFkNDQ0NDFlZTZlOTZlODVmNjZlNzEiLCJlbWFpbCI6InNob3A4QGV4YW1wbGUuY29tIiwicm9sZXMiOlsiU0hPUCJdLCJpYXQiOjE3NzI5NjI4ODQsImV4cCI6MTc3MzU2NzY4NH0.WTkphBGdUQ4Lpf9e0MREqUS5orWdfUlp5EVt88LrSHc
 # sudo lsof -i :3000
 # sudo kill -9 <PID>
+
+###
+GET {{url_dev}}/comments?productId=69ae563f9c631d4772f037e8&parentId=69ae5e1d9c631d4772f03800&limit=5&offset=0
+Content-Type: application/json
+x-api-key: {{api_key}}
+
+###
+GET {{url_dev}}/comments?productId=69ae563f9c631d4772f037e8&limit=10&offset=0
+Content-Type: application/json
+x-api-key: {{api_key}}
+
+
+###
+POST {{url_dev}}/comments
+Content-Type: application/json
+x-api-key: {{api_key}}
+
+{
+  "productId": "69ae563f9c631d4772f037e8",
+  "userId": 1,
+  "content": "Comment 1.1.1.2",
+  "parentId": "69ae5ef09c631d4772f03830"
+}
+
 
 ### 📦 Create Shop
 ### POST {{url_dev}}/shop/sign-up?lang=vi # can use this but i like header "Accept-Language: vi" instead
