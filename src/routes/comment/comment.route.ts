@@ -8,5 +8,6 @@ const router = Router()
 // create comment
 router.post("/", CommentController.createComment)
 router.get("/", CommentController.getComments)
+router.delete("/", CommentController.deleteComment)
 
 export default router

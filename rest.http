@@ -6,6 +6,18 @@
 # sudo lsof -i :3000
 # sudo kill -9 <PID>
 
+
+###
+DELETE {{url_dev}}/comments
+Content-Type: application/json
+x-api-key: {{api_key}}
+
+{
+  "commentId": "69ae5e1d9c631d4772f03800",
+  "productId": "69ae563f9c631d4772f037e8"
+}
+
+
 ###
 GET {{url_dev}}/comments?productId=69ae563f9c631d4772f037e8&parentId=69ae5e1d9c631d4772f03800&limit=5&offset=0
 Content-Type: application/json

@@ -5,6 +5,21 @@ import { SuccessResponse } from "../core/success.response"
 import CommentService from "../services/comment.service"
 
 class CommentController {
+    public async deleteComment(req: Request, res: Response) {
+
+        const { commentId, productId } = req.body
+
+        const result = await CommentService.deleteComments({
+            commentId,
+            productId
+        })
+
+        new SuccessResponse({
+            message: "Delete comment successfully",
+            metadata: result
+        }).send(res)
+    }
+
     public async getComments(req: Request, res: Response) {
 
         const { productId, parentId } = req.query

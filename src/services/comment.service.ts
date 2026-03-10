@@ -10,6 +10,59 @@ interface CreateCommentParams {
 }
 
 class CommentService {
+    static async deleteComments({
+        commentId,
+        productId
+    }: {
+        commentId: string
+        productId: string
+    }) {
+
+        const commentObjectId = new Types.ObjectId(commentId)
+        const productObjectId = new Types.ObjectId(productId)
+
+        const comment = await Comment.findById(commentObjectId)
+
+        if (!comment) {
+            throw new Error("Comment not found")
+        }
+
+        const left = comment.comment_left
+        const right = comment.comment_right
+        const width = right - left + 1
+
+        // delete subtree
+        await Comment.deleteMany({
+            comment_productId: productObjectId,
+            comment_left: { $gte: left },
+            comment_right: { $lte: right }
+        })
+
+        // update right
+        await Comment.updateMany(
+            {
+                comment_productId: productObjectId,
+                comment_right: { $gt: right }
+            },
+            { $inc: { comment_right: -width } }
+        )
+
+        // update left
+        await Comment.updateMany(
+            {
+                comment_productId: productObjectId,
+                comment_left: { $gt: right }
+            },
+            { $inc: { comment_left: -width } }
+        )
+
+        return {
+            commentId,
+            deletedSubtree: true,
+            deletedCount: width / 2
+        }
+    }
+
     static async getCommentsByParentId({
         productId,
         parentId,
