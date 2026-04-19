@@ -35,7 +35,6 @@ export class Product {
     }
 
 
-
     async publishProductByShop({ product_shop, product_id }: { product_shop: string; product_id: string }) {
         return await ProductRepo.publishProductByShop({ product_shop, product_id });
     }
@@ -44,15 +43,14 @@ export class Product {
         return await ProductModel.create({ ...this, _id: product_id });
     }
 
-    // async findAllisPublishForShop({ limit = 50, skip = 0 }: { limit?: number; skip?: number }) {
-    //     const query = { product_shop: this.product_shop, isPublished: true };
-    //     return await ProductRepo.publishProductForShop({ query, limit, skip });
-    // }
+    async findAllisPublishForShop({ limit = 50, skip = 0 }: { limit?: number; skip?: number }) {
+        const query = { product_shop: this.product_shop, isPublished: true };
+        return await ProductRepo.findAllProductsForShop({ query, limit, skip });
+    }
 
-    // 👉 method này gọi xuống repository
     async findAllDraftsForShop({ limit = 50, skip = 0 }: { limit?: number; skip?: number }) {
         const query = { product_shop: this.product_shop, isDraft: true };
-        return await ProductRepo.findAllDraftsForShop({ query, limit, skip });
+        return await ProductRepo.findAllProductsForShop({ query, limit, skip });
     }
 }
 

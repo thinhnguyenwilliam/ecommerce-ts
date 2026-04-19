@@ -6,6 +6,8 @@ import ProductController from "../../controllers/product.controller";
 
 const router = Router();
 
+// api tìm kiếm product thì viết trên  dòng router.use(authenticationV2); vì user bình thường mà
+
 // Apply authentication middleware
 router.use(authenticationV2);
 
@@ -19,4 +21,12 @@ router.get(
   "/drafts/all",
   asyncHandler((req, res) => new ProductController().getAllDraftsForShop(req, res))
 );
+
+router.patch(
+  "/:id/publish",
+  asyncHandler((req, res) =>
+    new ProductController().publishProductByShop(req, res)
+  )
+);
+
 export default router;

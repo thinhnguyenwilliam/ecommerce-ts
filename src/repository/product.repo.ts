@@ -1,6 +1,7 @@
 // src/repository/product.repo.ts
 import { ProductModel } from "../models/product.model";
-import { Types } from "mongoose";
+
+
 
 export const publishProductByShop = async ({
     product_shop,
@@ -9,18 +10,17 @@ export const publishProductByShop = async ({
     product_shop: string;
     product_id: string;
 }) => {
-    const foundShop = await ProductModel.findOne({
-        product_shop: new Types.ObjectId(product_shop),
-        _id: new Types.ObjectId(product_id),
-    });
-
-    if (!foundShop) return null;
-
-    foundShop.isDraft = false;
-    foundShop.isPublished = true;
-    await foundShop.save();
-
-    return foundShop;
+    return await ProductModel.findOneAndUpdate(
+        {
+            _id: product_id,
+            product_shop,
+        },
+        {
+            isDraft: false,
+            isPublished: true,
+        },
+        { new: true }
+    );
 };
 
 interface FindAllDraftsParams {
@@ -29,7 +29,7 @@ interface FindAllDraftsParams {
     skip: number;
 }
 
-export const findAllDraftsForShop = async ({
+export const findAllProductsForShop = async ({
     query,
     limit,
     skip,

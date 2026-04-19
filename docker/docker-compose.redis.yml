@@ -1,0 +1,32 @@
+# ecommerce-ts/docker/docker-compose.redis.yml
+
+services:
+  redis:
+    image: redis:7
+    container_name: ecommerce-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+    networks:
+      - ecommerce-net
+
+  redisinsight:
+    image: redis/redisinsight:latest
+    container_name: redis-insight
+    restart: unless-stopped
+    ports:
+      - "5540:5540"
+
+    networks:
+      - ecommerce-net
+
+volumes:
+  redis_data:
+
+networks:
+  ecommerce-net:
+    external: true

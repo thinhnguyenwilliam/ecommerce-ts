@@ -1,10 +1,31 @@
 @url_dev = http://localhost:3000/v1/api
 @api_key = bb6a9607bec843b8b296aecbc76726a4e4d9ea1e528186a40c93d3ae3ef54f3a6c97695a9d23f7642c653c3f79006489cfb4f7c584276a8e28c1e866c87b0b6f
-@access_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OWFkNDQ0NDFlZTZlOTZlODVmNjZlNzEiLCJlbWFpbCI6InNob3A4QGV4YW1wbGUuY29tIiwicm9sZXMiOlsiU0hPUCJdLCJpYXQiOjE3NzI5NjI4ODQsImV4cCI6MTc3MzEzNTY4NH0.WYxIlUSUdrclaIbvIyBPFIza9KrwPx88j1OEoANwN8Y
-@client_id = 69ad44441ee6e96e85f66e71
-@rtoken_id = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OWFkNDQ0NDFlZTZlOTZlODVmNjZlNzEiLCJlbWFpbCI6InNob3A4QGV4YW1wbGUuY29tIiwicm9sZXMiOlsiU0hPUCJdLCJpYXQiOjE3NzI5NjI4ODQsImV4cCI6MTc3MzU2NzY4NH0.WTkphBGdUQ4Lpf9e0MREqUS5orWdfUlp5EVt88LrSHc
+@access_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OWU0NTRkNjY5MGRlYzJiOTQ0NTllMjEiLCJlbWFpbCI6InNob3AxMEBleGFtcGxlLmNvbSIsInJvbGVzIjpbIlNIT1AiXSwiaWF0IjoxNzc2NTcxNjA2LCJleHAiOjE3NzY3NDQ0MDZ9.xgQnHq-AK6u_x0btWHATpvqYVNWEtfs9s_wXnyco1Lw
+@client_id = 69e454d6690dec2b94459e21
+@rtoken_id = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OWU0NTRkNjY5MGRlYzJiOTQ0NTllMjEiLCJlbWFpbCI6InNob3AxMEBleGFtcGxlLmNvbSIsInJvbGVzIjpbIlNIT1AiXSwiaWF0IjoxNzc2NTcxNjA2LCJleHAiOjE3NzcxNzY0MDZ9.Y6x_LWnFrT672YVLoHGt98X-3EJPmAexytrn620nY3I
 # sudo lsof -i :3000
 # sudo kill -9 <PID>
+
+
+### ❌ Unpublish Product
+PATCH {{url_dev}}/product/69ae563f9c631d4772f037e8/unpublish
+x-api-key: {{api_key}}
+authorization: {{access_token}}
+x-client-id: {{client_id}}
+
+
+### 📦 Get Published Products
+GET {{url_dev}}/product/published/all?limit=10&skip=0
+x-api-key: {{api_key}}
+authorization: {{access_token}}
+x-client-id: {{client_id}}
+
+### 🚀 Publish Product
+PATCH {{url_dev}}/product/69e461c5b91cb778d225b472/publish
+Content-Type: application/json
+x-api-key: {{api_key}}
+authorization: {{access_token}}
+x-client-id: {{client_id}}
 
 
 ###
@@ -50,8 +71,8 @@ x-api-key: {{api_key}}
 Accept-Language: vi
 
 {
-  "name": "My Shop8",
-  "email": "shop8@example.com",
+  "name": "My Shop10",
+  "email": "shop10@example.com",
   "password": "supersecure123",
   "phone": "0123456789",
   "address": "123 Main Street"
@@ -73,6 +94,7 @@ GET {{url_dev}}/product/drafts/all?limit=10&skip=0
 x-api-key: {{api_key}}
 authorization: {{access_token}}
 x-client-id: {{client_id}}
+
 
 ### 🔄 Refresh Token
 POST {{url_dev}}/shop/handlerRefreshToken
