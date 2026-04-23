@@ -3,6 +3,7 @@ import { Types } from "mongoose";
 import { BadRequestError } from "../core/error.response";
 import { ElectronicModel, FurnitureModel, ProductModel } from "../models/product.model";
 import * as ProductRepo from "../repository/product.repo";
+import * as InventoryRepo from "../repository/inventory.repo";
 
 export class Product {
     product_name: string;
@@ -40,7 +41,16 @@ export class Product {
     }
 
     async createProduct(product_id?: Types.ObjectId | string) {
-        return await ProductModel.create({ ...this, _id: product_id });
+        const newProduct = await ProductModel.create({ ...this, _id: product_id });
+
+        // 👉 insert inventory ngay sau khi tạo product
+        await InventoryRepo.insertInventory({
+            productId: newProduct.id,
+            shopId: this.product_shop,
+            stock: this.product_quantity,
+        });
+
+        return newProduct;
     }
 
     async findAllisPublishForShop({ limit = 50, skip = 0 }: { limit?: number; skip?: number }) {

@@ -1,8 +1,8 @@
 @url_dev = http://localhost:3000/v1/api
 @api_key = bb6a9607bec843b8b296aecbc76726a4e4d9ea1e528186a40c93d3ae3ef54f3a6c97695a9d23f7642c653c3f79006489cfb4f7c584276a8e28c1e866c87b0b6f
-@access_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OWU0NTRkNjY5MGRlYzJiOTQ0NTllMjEiLCJlbWFpbCI6InNob3AxMEBleGFtcGxlLmNvbSIsInJvbGVzIjpbIlNIT1AiXSwiaWF0IjoxNzc2NTcxNjA2LCJleHAiOjE3NzY3NDQ0MDZ9.xgQnHq-AK6u_x0btWHATpvqYVNWEtfs9s_wXnyco1Lw
-@client_id = 69e454d6690dec2b94459e21
-@rtoken_id = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OWU0NTRkNjY5MGRlYzJiOTQ0NTllMjEiLCJlbWFpbCI6InNob3AxMEBleGFtcGxlLmNvbSIsInJvbGVzIjpbIlNIT1AiXSwiaWF0IjoxNzc2NTcxNjA2LCJleHAiOjE3NzcxNzY0MDZ9.Y6x_LWnFrT672YVLoHGt98X-3EJPmAexytrn620nY3I
+@access_token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OWExNDQyNDMxYzIyYzJjNjhhOGIwNmUiLCJlbWFpbCI6InNob3A3QGV4YW1wbGUuY29tIiwiaWF0IjoxNzc2ODU0NDcwLCJleHAiOjE3NzcwMjcyNzB9.LEx6jJ9-PD2IoSD_C4GpdGjc61bqexxtEpYD87YQ6T4
+@client_id = 69a1442431c22c2c68a8b06e
+@rtoken_id = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OWExNDQyNDMxYzIyYzJjNjhhOGIwNmUiLCJlbWFpbCI6InNob3A3QGV4YW1wbGUuY29tIiwiaWF0IjoxNzc2ODU0NDcwLCJleHAiOjE3Nzc0NTkyNzB9.9sFZFRKY7iE5Bc3uANoqotH6nfpbALem6sE4S-GbKuc
 # sudo lsof -i :3000
 # sudo kill -9 <PID>
 
@@ -114,7 +114,7 @@ x-client-id: {{client_id}}
 authorization: {{access_token}}
 
 {
-  "product_name": "Furniture 01",
+  "product_name": "Furniture 02",
   "product_thumb": "https://example.com/nike-tshirt.jpg",
   "product_description": "Comfortable cotton T-shirt Furniture",
   "product_price": 25,
